@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="w3.css"> <!--CSS Sheet-->
+    <link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script>
+    $(document).ready(function(){  
+    	var yql_url = 'https://query.yahooapis.com/v1/public/yql';
+    	var url = 'http://partners.api.skyscanner.net/apiservices/browseroutes/v1.0/US/USD/en-GB/mke/sfo/2017-03-28/2017-04-01?apiKey=re133362579315513844902103282865'
+
+    	$.ajax({
+    		type: "GET",
+    		crossOrigin: true,
+    		'url': yql_url,
+    		  'data': {
+    		    'q': 'SELECT * FROM json WHERE url="'+url+'"',
+    		    'format': 'json',
+    		    'jsonCompat': 'new',
+    		  },
+    		dataType: "json",
+    		//jsonpCallback: "localJsonpCallback",
+    		success: function(response)
+    		{
+                var origin = response.query.results.json.Places[0].Name;
+                var orginid = response.query.results.json.Places[0].PlaceId;
+                var destination = response.query.results.json.Places[1].Name;
+                var dest_Id = response.query.results.json.Places[1].PlaceId;
+                var carrier_name;
+                $("#summary").append(origin + " --- " + destination);
+
+                $.each(response.query.results.json.Quotes,function(i,value){
+                    //window.alert(value.Direct);
+                    console.log(response.query.results.json);
+
+                    // if (value.Direct == true)
+                    // {
+                        // This will check to see if the OriginId in the array matches the orgin we previously got
+                        if(value.OutboundLeg.OriginId == orginid && value.OutboundLeg.DestinationId == dest_Id)
+                        {
+                            $.each(response.query.results.json.Carriers, function(j,value)
+                            {
+                                if ( response.query.results.json.Quotes[i].OutboundLeg.CarrierIds == value.CarrierId) 
+                                {
+                                    carrier_name = value.Name;
+                                    return false;
+                                }
+
+                            });
+                            $("ul").append("<li>" +"Airline: " + carrier_name + " "+  origin + " --- " + destination + " Price: $"+ value.MinPrice +"</li>");
+                        }                
+                    // }
+                    // // If not then we need to iterrate through the whole place list until we find it
+                    // else
+                    // {
+                    //     $("ul").append("<li>"+ "In else" +"</li>");
+                    // }        
+                });
+                
+            }	
+    	});	
+    });
+
+    </script>
+
+    
+    <div class = "w3-row" id = "summary">
+        <!-- This is where the Origin and the Destination will go -->
+    </div>   
+    
+
+</head>
+<body>
+<div class= "p_list w3-container" >
+<ul class = "w3-row flight_list">
+
+</ul>
+</div>
+</body>
+
+
+
+
+
+
+
+
+
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<link rel="stylesheet" href="w3.css"> <!--CSS Sheet-->
+<link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.min.css">
+
+<header>
+<!-- CREATE THE MENU BAR -->
+	<div class = "w3-top">
+		<ul class ="w3-navbar w3-blue w3-left-aign w3-card-2" id ="Menu">
+			<li class ="w3-hide-medium w3-opennav"></li>
+			<li> <a class="w3-padding-large" href="index.html">Home</a> </li>
+			<li class ="w3-hide-small"> <a class="w3-padding-large" href="#About_Us">About Us</a> </li>
+			<li class ="w3-hide-small"> <a class="w3-padding-large" href="#Blog">Blog</a>
+			<li class ="w3-hide-small"> <a class="w3-padding-large w3-sand" href="Contact.html">Contac Us</a></li>
+			<li class="w3-hide-medium w3-hide-large w3-opennav w3-right"><a href="javascript:void(0);" onclick="Open_Menu()">&#9776;</a></li>
+			<button class = "w3-btn w3-right w3-padding-large w3-blue" onclick = "document.getElementById('signup_modal').style.display = 'block'"> <i> Log In/Sign up</i></button>
+		</ul>
+	</div>
+
+	<!-- CREATE THE MODAL -->
+	<div class = "w3-modal" id = "signup_modal">
+		<div class = "w3-modal-content" >
+			<div class= "w3-container w3-blue">
+				<span onclick= "document.getElementById('signup_modal').style.display = 'none'" class = "w3-closebtn">&times;</span>
+				<p class = "w3-large w3-center"> Login/Sign Up</p>
+			</div>
+			<div class="w3-container">
+				<p class = "w3-xxlarge"> Sorry! Login/Sign Up Not Available</p>
+				<p class = "w3-large"> We are working really hard to get this service to you</p>
+			</div>
+		</div>
+	</div>
+	
+	
+</header>
+
+<body>
+
+<!-- START OF THE BODY -->
+<div class="w3-content" style="margin-top:46px">
+	<!-- HEADER -->
+	<div>
+		<h1 class = " w3-container w3-center w3-padding-64">
+			Have Any Questions Please Contact Us!
+		</h1>
+	</div>
+
+	<!-- SPLIT THE SCREEN IN HALF (COLUMN) ONE SIDE FOR OUR INFO THE OTHER FOR CONTACT FORM -->
+	<div class = "w3-col m6">
+		<i class ="fa fa-envelope"> Email:RewardEdu@gmail.com</i>
+	</div>
+
+	<div class = "w3-col m6 w3-padding-64">
+		<form method = "post" action = "<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" > 
+			<input class = "w3-input w3-border" type ="text" name = "Name" placeholder ="Name">
+			<input class = "w3-input w3-border" type ="text" name = "Email" placeholder ="Email">
+			<textarea class = "w3-input w3-border" name = "Message" cols="10" rows="10" placeholder ="Message"></textarea>
+			<button class= "w3-btn w3-card-12">Send</button>
+
+		</form>
+	</div>
+
+</div>
+
+</body>
+</html>
+
+

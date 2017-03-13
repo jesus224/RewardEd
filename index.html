@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<link rel="stylesheet" href="w3.css"> <!--CSS Sheet-->
+	<link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+<script type="text/javascript">
+
+function fill_A(Value)
+{
+	$("#A_Airport").val(Value);
+	$("#suggest").hide();
+}
+
+function fill_D(Value)
+{
+	$("#D_Airport").val(Value);
+	$("#suggest").hide();
+}
+
+$(document).ready(
+	function()
+	{
+		$("#D_Airport").keyup(
+			function() 
+			{
+				var name = $("#D_Airport").val();
+				if(name=="")
+				{
+					$("#suggest").html("");
+				}
+				else
+				{
+					$.ajax(
+					{
+						type: "POST",
+						url: "ajax.php",
+						data: "name="+ name ,
+						success: function(html){
+						$("#suggest").html(html).show();
+						}
+					});
+				}
+			});
+
+		$("#A_Airport").keydown(
+			function() 
+			{
+				var name = $("#A_Airport").val();
+				if(name=="")
+				{
+					$("#A_suggest").html("");
+				}
+				else
+				{
+					$.ajax(
+					{
+						type: "POST",
+						url: "ajax.php",
+						data: "A_name="+ name ,
+						success: function(html){
+						$("#A_suggest").html(html).show();
+						}
+					});
+				}
+			});
+	});
+
+</script>
+
+</head>
+
+
+
+
+<script src="Top_menu.js"></script>
+
+<header>
+	<!-- CREATE THE MENU BAR -->
+	<div class = "w3-top ">
+		<div class= "w3-row">
+			<div class= "w3-column">
+				<ul class ="w3-navbar w3-blue w3-left-aign w3-card-2" id ="Menu">
+					<li class ="w3-hide-medium w3-opennav"></li>
+					<li> <a class="w3-padding-large" href="#Home">Home</a> </li>
+					<li class ="w3-hide-small"> <a class="w3-padding-large" href="#About_Us">About Us</a> </li>
+					<li class ="w3-hide-small"> <a class="w3-padding-large" href="#Blog">Blog</a>
+					<li class ="w3-hide-small"> <a class="w3-padding-large" href="Contact.html">Contac Us</a></li>
+					<li class="w3-hide-medium w3-hide-large w3-opennav w3-right"><a href="javascript:void(0);" onclick="Open_Menu()">&#9776;</a></li>
+					<button class = "w3-btn w3-right w3-padding-large w3-blue" onclick = "document.getElementById('signup_modal').style.display = 'block'"> <i> Log In/Sign up</i></button>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<!-- CREATE THE MODAL -->
+	<div class = "w3-modal" id = "signup_modal">
+		<div class = "w3-modal-content" >
+			<div class= "w3-container w3-blue">
+				<span onclick= "document.getElementById('signup_modal').style.display = 'none'" class = "w3-closebtn">&times;</span>
+				<p class = "w3-large w3-center"> Login/Sign Up</p>
+			</div>
+			<div class="w3-container">
+				<p class = "w3-xxlarge"> Sorry! Login/Sign Up Not Available</p>
+				<p class = "w3-large"> We are working really hard to get this service to you</p>
+			</div>
+		</div>
+	</div>
+</header>
+
+
+
+
+<body>
+	<!-- THIS IS THE CONTENT (BODY) OF THE WEBSITE -->
+	<div class ="w3-container">
+		<div class = "w3-row w3-padding-128">
+			<p class = "w3-col w3-center" > Where would you like to go? </p>
+			<div class = "w3-row">
+				<div class= "w3-col"> 
+					<form class= "w3-center" action= "Request.html">
+						<input type= "text" name= "D_Airport" id= "D_Airport" placeholder= "Origin">
+						<input type= "text" name= "A_Airport" id= "A_Airport" placeholder= "Destination">
+						<div id= "suggest">
+						<!-- This will be populated with suggestions -->
+						</div>
+						<div id= "A_suggest" class= "w3-right">
+						
+						</div>
+						<div class= "w3-col">
+							<br>
+							<button type= "submit" class= "w3-btn w3-right-align">GO!</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<!-- FOOTER OF THE PAGE -->
+	<div>
+	<footer class= " w3-padding-64 w3-container w3-center  w3-light-grey w3-xlarge ">
+		<div class= "w3-col m6 fa-s">
+			<i class= "fa fa-facebook-square w3-small"> Facebook Page</i>
+			<i class= "fa fa-twitter w3-small"> Twitter</i>
+			<i class= "fa fa-facebook-square w3-small"> Facebook Page</i>
+		</div>
+	</footer>
+	</div>
+
+</body>
+</html>
+
+
